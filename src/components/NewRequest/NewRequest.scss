@@ -1,0 +1,124 @@
+@import "~react-datepicker/dist/react-datepicker.css";
+
+.new-request__content {
+  width: 470px;
+  height: 550px;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.new-request__inf {
+  height: 321px;
+  width: 361px;
+  padding: 30px;
+  h3 {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+.new-request__content__sick{
+  height: 627px;
+}
+
+.select {
+  padding-top: 10px;
+  position: relative;
+  select {
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    height: 36px;
+    padding: 9px 9px;
+    background: none;
+    border: 1px solid #d9dadb;
+    border-radius: 3px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: 0.23px;
+    color: #333d47;
+    option {
+      display: flex;
+    }
+  }
+}
+
+.select:after {
+  content: "";
+  display: block;
+  border-style: solid;
+  border-width: 5px 4px 0 4px;
+  border-color: #000 transparent transparent transparent;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  z-index: 1;
+  margin-top: 3px;
+}
+
+.new-request__date {
+}
+
+.date-block {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  .date-block__element {
+    .date-block__title {
+      padding-bottom: 5px;
+      font-size: 13px;
+      line-height: 18px;
+      display: flex;
+      img:hover {
+        color: green;
+      }
+    }
+    .date-block__calculate {
+      cursor: none;
+      height: 14px;
+      width: 40px;
+      display: flex;
+      color: #c2c2c2;
+      font-size: 12px;
+      align-items: center;
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid #d9dadb;
+      background-color: #f4f6f8bb;
+    }
+    .date-block__pick {
+      height: 34px;
+      width: 155px;
+      background: #fff url("../../assets/calendar.png") 90% 50% no-repeat;
+      padding: 0 10px;
+      border-radius: 4px;
+      border: 1px solid #d9dadb;
+      cursor: pointer;
+      box-shadow: none;
+    }
+    .date-block__pick__vacation {
+      width: 118px;
+    }
+  }
+}
+
+.date-block__comment {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  line-height: 18px;
+  margin-top: 18px;
+  textarea {
+    margin-top: 5px;
+    width: 339px;
+    height: 58px;
+    resize: none;
+    border: 1px solid #d9dadb;
+    border-radius: 4px;
+    padding: 10px;
+  }
+}

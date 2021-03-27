@@ -1,0 +1,45 @@
+
+.vacation__content {
+  width: 470px;
+  height: 125px;
+}
+
+.vacation__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 52px;
+  width: 410px;
+  margin-bottom: 12px;
+  h3 {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  div {
+    display: flex;
+    justify-content: space-between;
+    p {
+      font-size: 13px;
+      line-height: 18px;
+    }
+  }
+}
+
+.details {
+  background-color: #f6f8fd;
+  height: 26px;
+  width: 100%;
+  border-radius: 0px 0px 5px 5px;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 10px;
+  line-height: 14px;
+  color: #afb7bf;
+  img {
+    margin-right: 7px;
+  }
+}
