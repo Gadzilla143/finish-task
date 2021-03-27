@@ -1,19 +1,32 @@
 .requests-list__content {
-    width: 675px;
-    height: 671px;
-    position: relative;
-    img {
-        margin: 110px;
-    }
+  width: 675px;
+  height: 671px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  .empty {
+    position: absolute;
+    margin: 200px;
+    margin-top: 195px;
+  }
+  .year__group {
+    background: #5495FF;
+    color: white;
+    width: 655px;
+    height: 20px;
+    font-size: 12px;
+    align-items: center;
+    padding-top: 4px;
+    padding-left: 20px;
+  }
 }
 
 .title {
-    top: 0;
-    position: absolute;
-    padding: 21px;
-    padding-left: 69px;
-    font-size: 18px;
-    line-height: 24px;
-    width: 100%;
-    height: 60px;
+  padding: 21px;
+  padding-left: 23.8px;
+  font-size: 18px;
+  letter-spacing: 0.4px;
+  line-height: 24px;
+  width: 100%;
+  height: 20px;
 }
