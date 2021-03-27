@@ -54,6 +54,13 @@ const NewRequest = () => {
                             <option value="ownExpense">Own expense leave</option>
                         </select>
                     </div>
+                    {requestType === "sick" &&
+                        <div className="important"> <b>Important:</b> Please bring the official confirmation of your 
+                            sick leave from a medical establishment to Personnel Officer 
+                            (Katsiaryna Barysik) as soon as you get it. 
+                        </div>
+                        
+                    }
                     <div className="new-request__date">
                         <div className="date-block">
                             <div className="date-block__element">
@@ -71,11 +78,10 @@ const NewRequest = () => {
                             <div className="date-block__element">
                                 <div className="date-block__title">{requestType === "sick" && <div>Expected&nbsp;</div>}End Date <div style={{ color: "#d9dadb", marginLeft: "3px", letterSpacing: "-0.2px" }}> (inclusive)</div></div>
                                 <DatePicker
-                                    className={`date-block__pick ${requestType === "vacation" ? "vacation__pick" : ""}`}
+                                    className={`date-block__pick ${requestType === "vacation" ? "date-block__pick__vacation" : ""}`}
                                     selected={endDate}
                                     onChange={date => {
                                         setEndDate(date)
-
                                     }}
                                     dateFormat="d MMMM yyyy"
                                 />
@@ -92,6 +98,13 @@ const NewRequest = () => {
                         <div className="date-block__comment">
                             Comment
                             <textarea ></textarea>
+                        </div>
+                        <div className="date-block__submit">
+                            <div className="submit-btn">SUBMIT</div>
+                            <div className="date-block__questions">
+                                Have questions?
+                                <a style={{marginLeft: "7px", cursor: 'pointer'}}>Read FAQ</a>
+                            </div>
                         </div>
                     </div>
                 </div>

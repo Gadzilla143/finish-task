@@ -5,6 +5,8 @@
   height: 550px;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: flex-start;
+  margin-bottom: 50px;
 }
 
 .new-request__inf {
@@ -17,7 +19,7 @@
   }
 }
 
-.new-request__content__sick{
+.new-request__content__sick {
   height: 627px;
 }
 
@@ -60,7 +62,10 @@
   margin-top: 3px;
 }
 
-.new-request__date {
+.important {
+  padding-top: 12px;
+  padding-bottom: 15px;
+  font-size: 12px;
 }
 
 .date-block {
@@ -74,7 +79,7 @@
       line-height: 18px;
       display: flex;
       img:hover {
-        color: green;
+        fill: blue;
       }
     }
     .date-block__calculate {
@@ -120,5 +125,28 @@
     border: 1px solid #d9dadb;
     border-radius: 4px;
     padding: 10px;
+  }
+}
+
+.date-block__submit {
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  letter-spacing: 0.24px;
+  font-size: 12px;
+  a {
+    color: #5495ff;
+  }
+  .submit-btn {
+    width: 101px;
+    height: 36px;
+    color: white;
+    border-radius: 3px;
+    background-color: #5495ff;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    padding-left: 19px;
   }
 }
