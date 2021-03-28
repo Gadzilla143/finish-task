@@ -4,9 +4,12 @@ import vacation from '../../assets/new_request/Vacation.png'
 import sick from '../../assets/new_request/Sick.png'
 import ownExpense from '../../assets/new_request/ownExpense.png'
 import DatePicker from "react-datepicker";
-import Question from "../../assets/Question.svg"
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { openConfirmPopupAction } from '../../store/reducers/confirmPopupReducer'
+import Confirm from '../modals/Confirm/Confirm'
 import { addRequestAction } from '../../store/reducers/requesrsReducer'
+import calculateDays from '../../services/calculateDays'
+
 
 
 const NewRequest = () => {
@@ -16,12 +19,10 @@ const NewRequest = () => {
     const [endDate, setEndDate] = useState(new Date());
     const [calcDays, setCalcDays] = useState(1)
     const dispatch = useDispatch()
-
+    const popupActive = useSelector(state => state.confirmPopup.popupActive)
 
     useEffect(() => {
-        const daysLag = Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24));
-        setCalcDays(daysLag)
-        
+        setCalcDays(calculateDays(startDate, endDate))
     }, [startDate, endDate])
 
     useEffect(() => {
@@ -52,12 +53,17 @@ const NewRequest = () => {
             todayDate: new Date(),
             year: startDate.getFullYear()
         }
-        dispatch(addRequestAction(request))
-
+        if (request.requestType === "vacation") {
+            dispatch(openConfirmPopupAction(request))
+        } else {
+            dispatch(addRequestAction(request))
+        }
     }
+
     const handleChange = (event) => {
         setRequestType(event.target.value)
     }
+
     return (
         <div className="container ">
             <div className={`content new-request__content ${requestType === "sick" ? "new-request__content__sick" : ""}`}>
@@ -104,7 +110,7 @@ const NewRequest = () => {
                             </div>
                             {requestType === "vacation" &&
                                 <div className="date-block__element">
-                                    <div className="date-block__title">Day(s) <img src={Question} style={{ marginLeft: "6px" }} /></div>
+                                    <div className="date-block__title">Day(s) <div className="question" style={{ marginLeft: "6px" }}/ ></div>
                                     <div className="date-block__calculate">
                                         {calcDays}
                                     </div>
@@ -124,9 +130,8 @@ const NewRequest = () => {
                         </div>
                     </div>
                 </div>
-
             </div>
-
+            {popupActive && <Confirm />}
         </div>
     )
 }

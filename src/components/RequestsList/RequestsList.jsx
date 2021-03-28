@@ -11,22 +11,26 @@ const RequestsList = () => {
 
     const renderData = data => {
         let res = []
+        let counter = 0;
         data.forEach((key, i) => {
             res.push(
                 <div className="year__group" key={i}>{key[0].year} Year</div>
             )
-            key.forEach(req =>
+            key.forEach(req => {
+                counter++;
                 res.push(
-                    <Request key={req.id} req={req} />
+                    <Request status={req.year < 2021 ? "Approved and registered" : "Approved"} mode={counter % 2 ? "shadow" : "light"} key={req.id} req={req} />
                 )
+            }
             )
         })
         return res
     }
+
     useEffect(() => {
-        console.log(groupByYear(requests))
         setGroupedData(groupByYear(requests).reverse())
     }, [requests])
+
     return (
         <div className="container">
             <div className="content requests-list__content">

@@ -1,17 +1,18 @@
 .request {
-  background-color: #f6f8fd;
   width: 623px;
-  height: 94px;
+  height: 79px;
   display: flex;
   justify-content: space-between;
   padding: 0 26px;
   padding-top: 15px;
+  
   .request__block {
     display: flex;
   }
   .arrow {
-    width: 20px;
-    height: 20px;
+    margin-top: 5px;
+    width: 10px;
+    height: 10px;
     cursor: pointer;
   }
   .request__logo {
@@ -26,13 +27,25 @@
     height: 62px;
     p {
       font-size: 12px;
+      letter-spacing: -0.4px;
+      margin-bottom: 4px;
     }
     b {
-        display: flex;
+      letter-spacing: -0.63px;
+      display: flex;
     }
     .request__state {
+      margin-top: 3px;
+      letter-spacing: 0.2px;
       font-style: italic;
       color: #3fad44;
     }
   }
+}
+
+.shadow {
+  background-color: #f6f8fd;
+}
+.light {
+  background-color: white;
 }
