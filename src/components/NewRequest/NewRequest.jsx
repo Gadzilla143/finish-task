@@ -4,22 +4,21 @@ import vacation from '../../assets/new_request/Vacation.png'
 import sick from '../../assets/new_request/Sick.png'
 import ownExpense from '../../assets/new_request/ownExpense.png'
 import DatePicker from "react-datepicker";
-import { useDispatch, useSelector } from 'react-redux'
-import { openConfirmPopupAction } from '../../store/reducers/confirmPopupReducer'
+import { useDispatch } from 'react-redux'
 import Confirm from '../modals/Confirm/Confirm'
-import { addRequestAction } from '../../store/reducers/requesrsReducer'
 import calculateDays from '../../services/calculateDays'
-
-
+import { addRequestAction } from '../../store/reducers/requesrsReducer'
 
 const NewRequest = () => {
     const [requestType, setRequestType] = useState("vacation");
+    const [request, setRequest] = useState({})
     const [img, setImg] = useState(vacation)
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [calcDays, setCalcDays] = useState(1)
+    const [popupActive, setPopupActive] = useState(false)
     const dispatch = useDispatch()
-    const popupActive = useSelector(state => state.confirmPopup.popupActive)
+    
 
     useEffect(() => {
         setCalcDays(calculateDays(startDate, endDate))
@@ -47,6 +46,8 @@ const NewRequest = () => {
         const request = {
             id: new Date().getTime(),
             requestType,
+            // Since there is no request registration function in the task, I register all requests until 2021 by default.
+            registered: startDate.getFullYear() < 2021,
             startDate,
             endDate,
             days: calcDays,
@@ -54,7 +55,8 @@ const NewRequest = () => {
             year: startDate.getFullYear()
         }
         if (request.requestType === "vacation") {
-            dispatch(openConfirmPopupAction(request))
+            setRequest(request)
+            setPopupActive(true)
         } else {
             dispatch(addRequestAction(request))
         }
@@ -131,7 +133,7 @@ const NewRequest = () => {
                     </div>
                 </div>
             </div>
-            {popupActive && <Confirm />}
+            {popupActive && <Confirm setActive={setPopupActive} request={request}  />}
         </div>
     )
 }

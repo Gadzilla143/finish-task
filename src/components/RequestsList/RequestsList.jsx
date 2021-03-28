@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 import Request from '../Requests/Request'
 import groupByYear from '../../services/groupByYear'
 
+
 const RequestsList = () => {
     const requests = useSelector(state => state.requests.requests)
     const [groupedData, setGroupedData] = useState([])
@@ -19,7 +20,7 @@ const RequestsList = () => {
             key.forEach(req => {
                 counter++;
                 res.push(
-                    <Request status={req.year < 2021 ? "Approved and registered" : "Approved"} mode={counter % 2 ? "shadow" : "light"} key={req.id} req={req} />
+                    <Request mode={counter % 2 ? "shadow" : "light"} key={req.id} req={req} />
                 )
             }
             )
