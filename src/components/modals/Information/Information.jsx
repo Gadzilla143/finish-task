@@ -5,23 +5,31 @@ import formatDate from '../../../services/formatDate'
 import vacation from '../../../assets/request/vacation.png'
 import sick from '../../../assets/request/sick.png'
 import ownExpense from '../../../assets/request/ownExpense.png'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { deleteRequestAction } from '../../../store/reducers/requesrsReducer'
 
-const Information = ({ request, setActive }) => {
+const Information = ({ request, setActive, setRequest, setChange }) => {
     const dispatch = useDispatch()
     const [imgUrl, setImgUrl] = useState('')
+    const [title, setTitle] = useState('')
     
+
     useEffect(() => {
         switch (request.requestType) {
-            case "vacation":
+            case "Vacation":
                 setImgUrl(vacation);
+                setTitle('Request for vacation')
+                
                 break;
-            case "sick":
+            case "Sick":
                 setImgUrl(sick);
+                setTitle('Sick leave request')
+                
                 break;
-            case "ownExpense":
+            case "Own expense":
                 setImgUrl(ownExpense);
+                setTitle('Request for leave at own expense')
+                
                 break;
             default:
                 setImgUrl(vacation);
@@ -33,20 +41,30 @@ const Information = ({ request, setActive }) => {
         setActive(false)
     }
 
+    const change = () => {
+        setChange(true)
+        setRequest(request)
+        setActive(false)
+    }
+
     return (
         <div className="modal">
             <div className="container">
                 <div className="content information__content">
                     <div className="information__title">
-                        <p>Request for vacation</p>
+                        <p>{title}</p>
                         <div className="copy" />
                     </div>
                     <div className="request__block inf__block">
                         <img className="request__logo" src={imgUrl} />
                         <div className="request__inf">
-                            <b>Vacation: {formatDate(request.startDate)} - {formatDate(request.endDate)}&nbsp;{request.requestType === 'vacation' && <div>({request.days} days)</div>}</b>
+                            <b>{request.dateTitle}: {formatDate(request.startDate)} - {formatDate(request.endDate)}&nbsp;{request.requestType === 'Vacation' && <div>({request.days} days)</div>}</b>
                             <p>Created: {formatDate(request.todayDate)}</p>
-                            <p style={{color: "black"}} className="request__state">{request.registered ? "Pending confirmation" : "Pending approval"}</p>
+                            {request.requestType === 'Own expense'
+                                &&
+                                <p>Reason: Reason type</p>
+                            }
+                            <p style={{ color: "black" }} className="request__state">{request.registered ? "Pending confirmation" : "Pending approval"}</p>
                         </div>
                     </div>
                     <div className="inf__approve">
@@ -77,12 +95,11 @@ const Information = ({ request, setActive }) => {
                                         <b>CANCEL REQUEST</b>
                                     </div>
                                     :
-                                    <div onClick={() => deleteRequest()} style={{width: "130px"}} className="btn decline">
+                                    <div onClick={() => deleteRequest()} style={{ width: "130px" }} className="btn decline">
                                         <b>DECLINE REQUEST</b>
                                     </div>
                             }
-
-                            <div className="btn decline"><b>CHANGE</b></div>
+                            <div onClick={() => change()} className="btn decline"><b>CHANGE</b></div>
                             <div onClick={() => setActive(false)} className="btn">CLOSE</div>
                         </div>
                     </div>

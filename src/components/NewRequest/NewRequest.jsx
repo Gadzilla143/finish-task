@@ -10,13 +10,14 @@ import calculateDays from '../../services/calculateDays'
 import { addRequestAction } from '../../store/reducers/requesrsReducer'
 
 const NewRequest = () => {
-    const [requestType, setRequestType] = useState("vacation");
+    const [requestType, setRequestType] = useState("Vacation");
     const [request, setRequest] = useState({})
     const [img, setImg] = useState(vacation)
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [calcDays, setCalcDays] = useState(1)
     const [popupActive, setPopupActive] = useState(false)
+    const [dateTitle, setDateTitle] = useState('')
     const dispatch = useDispatch()
     
 
@@ -27,13 +28,16 @@ const NewRequest = () => {
     useEffect(() => {
         let imgUrl = img
         switch (requestType) {
-            case "vacation":
+            case "Vacation":
+                setDateTitle('Vacation')
                 imgUrl = vacation;
                 break;
-            case "sick":
+            case "Sick":
+                setDateTitle('Sick leave')
                 imgUrl = sick;
                 break;
-            case "ownExpense":
+            case "Own expense":
+                setDateTitle('Own expense leave')
                 imgUrl = ownExpense;
                 break;
             default:
@@ -46,6 +50,7 @@ const NewRequest = () => {
         const request = {
             id: new Date().getTime(),
             requestType,
+            dateTitle,
             // Since there is no request registration function in the task, I register all requests until 2021 by default.
             registered: startDate.getFullYear() < 2021,
             startDate,
@@ -54,7 +59,7 @@ const NewRequest = () => {
             todayDate: new Date(),
             year: startDate.getFullYear()
         }
-        if (request.requestType === "vacation") {
+        if (request.requestType === "Vacation") {
             setRequest(request)
             setPopupActive(true)
         } else {
@@ -68,18 +73,18 @@ const NewRequest = () => {
 
     return (
         <div className="container ">
-            <div className={`content new-request__content ${requestType === "sick" ? "new-request__content__sick" : ""}`}>
+            <div className={`content new-request__content ${requestType === "Sick" ? "new-request__content__sick" : ""}`}>
                 <img src={img} />
                 <div className="new-request__inf">
                     <h3>New Request</h3>
                     <div className="select">
                         <select onChange={handleChange} value={requestType}>
-                            <option value="vacation">Vacation leave</option>
-                            <option value="sick">Sick leave</option>
-                            <option value="ownExpense">Own expense leave</option>
+                            <option value="Vacation">Vacation leave</option>
+                            <option value="Sick">Sick leave</option>
+                            <option value="Own expense">Own expense leave</option>
                         </select>
                     </div>
-                    {requestType === "sick" &&
+                    {requestType === "Sick" &&
                         <div className="important"> <b>Important:</b> Please bring the official confirmation of your
                             sick leave from a medical establishment to Personnel Officer
                             (Katsiaryna Barysik) as soon as you get it.
@@ -91,7 +96,7 @@ const NewRequest = () => {
                             <div className="date-block__element">
                                 <div className="date-block__title">Start Date <div style={{ color: "#d9dadb", marginLeft: "3px", letterSpacing: "-0.2px" }}>&nbsp; (inclusive)</div></div>
                                 <DatePicker
-                                    className={`date-block__pick ${requestType === "vacation" ? "date-block__pick__vacation" : ""}`}
+                                    className={`date-block__pick ${requestType === "Vacation" ? "date-block__pick__vacation" : ""}`}
                                     selected={startDate}
                                     onChange={date => {
                                         setStartDate(date)
@@ -100,9 +105,9 @@ const NewRequest = () => {
                                 />
                             </div>
                             <div className="date-block__element">
-                                <div className="date-block__title">{requestType === "sick" && <div>Expected&nbsp;</div>}End Date <div style={{ color: "#d9dadb", marginLeft: "3px", letterSpacing: "-0.2px" }}> (inclusive)</div></div>
+                                <div className="date-block__title">{requestType === "Sick" && <div>Expected&nbsp;</div>}End Date <div style={{ color: "#d9dadb", marginLeft: "3px", letterSpacing: "-0.2px" }}> (inclusive)</div></div>
                                 <DatePicker
-                                    className={`date-block__pick ${requestType === "vacation" ? "date-block__pick__vacation" : ""}`}
+                                    className={`date-block__pick ${requestType === "Vacation" ? "date-block__pick__vacation" : ""}`}
                                     selected={endDate}
                                     onChange={date => {
                                         setEndDate(date)
@@ -110,7 +115,7 @@ const NewRequest = () => {
                                     dateFormat="d MMM yyyy"
                                 />
                             </div>
-                            {requestType === "vacation" &&
+                            {requestType === "Vacation" &&
                                 <div className="date-block__element">
                                     <div className="date-block__title">Day(s) <div className="question" style={{ marginLeft: "6px" }}/ ></div>
                                     <div className="date-block__calculate">
