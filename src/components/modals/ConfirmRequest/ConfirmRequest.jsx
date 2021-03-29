@@ -1,38 +1,38 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { addRequestAction } from '../../../store/reducers/requesrsReducer'
-import vacation from '../../../assets/request/vacation.png'
-import formatDate from '../../../services/formatDate'
-import calculateDays from '../../../services/calculateDays'
-import './Confirm.scss'
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addRequestAction } from '../../../store/reducers/requesrsReducer';
+import vacation from '../../../assets/request/vacation.png';
+import formatDate from '../../../helpers/formatDate';
+import calculateDays from '../../../helpers/calculateDays';
+import './ConfirmRequest.scss';
 
-const Confirm = ({ request, setActive }) => {
-    const requests = useSelector(state => state.requests.requests)
-    const dispatch = useDispatch()
-    const [errorType, setErrorType] = useState('none')
-    const [errorText, setErrorText] = useState('')
+const ConfirmRequest = ({ currentRequest, setActive }) => {
+    const requests = useSelector(state => state.requests.requests);
+    const dispatch = useDispatch();
+    const [errorType, setErrorType] = useState('none');
+    const [errorText, setErrorText] = useState('');
 
     useEffect(() => {
-        if (requests.find(req => req.startDate === request.startDate)) {
+        if (requests.find(iterableRequest => iterableRequest.startDate === currentRequest.startDate)) {
             setErrorText('It looks like you already have a request for the same period. Please check the dates of your request.')
             setErrorType('alreadyHave')
-        } else if (calculateDays(request.todayDate, request.startDate) < 14) {
+        } else if (calculateDays(currentRequest.todayDate, currentRequest.startDate) < 14) {
             setErrorText('Please submit your request at least two weeks before the desired start date.')
             setErrorType('notEnoughDaysForTheRequest')
-        } else if (request.days === 2 && request.startDate.getDay() === 6) {
+        } else if (currentRequest.days === 2 && currentRequest.startDate.getDay() === 6) {
             // We don't know which countries users are from and what their holidays are. so I only counted weekends
             setErrorText('The selected interval includes only public holidays or weekend days. Please review the selected dates.')
             setErrorType('holidays')
-        } else if (request.days > 21) {
+        } else if (currentRequest.days > 21) {
             setErrorText('We know you must be tired. But please consider shoter vacation. How about 2 weeks?')
             setErrorType('toMuchDays')
         }
-    }, [])
+    }, []);
 
     const confirmHandle = () => {
-        dispatch(addRequestAction(request))
+        dispatch(addRequestAction(currentRequest))
         setActive(false)
-    }
+    };
 
     return (
         <div className="modal">
@@ -52,7 +52,7 @@ const Confirm = ({ request, setActive }) => {
                         }
                         <div className="confirm__data">
                             <img src={vacation} />
-                            <b>{formatDate(request.startDate)} - {formatDate(request.endDate)} ({request.days} days)</b>
+                            <b>{formatDate(currentRequest.startDate)} - {formatDate(currentRequest.endDate)} ({currentRequest.days} days)</b>
                         </div>
                     </div>
                     <div className="confirm__bottom">
@@ -83,4 +83,4 @@ const Confirm = ({ request, setActive }) => {
     )
 }
 
-export default Confirm
+export default ConfirmRequest;

@@ -1,51 +1,47 @@
-import React, { useEffect, useState } from 'react'
-import './RequestsList.scss'
-import emptyList from '../../assets/requests_list/empty.png'
-import { useSelector } from 'react-redux'
-import Request from '../Requests/Request'
-import groupByYear from '../../services/groupByYear'
-
+import React, { useEffect, useState } from 'react';
+import './RequestsList.scss';
+import emptyList from '../../assets/requests_list/empty.png';
+import { useSelector } from 'react-redux';
+import Request from '../Request/Request';
+import groupByYear from '../../helpers/groupByYear';
 
 const RequestsList = () => {
-    const requests = useSelector(state => state.requests.requests)
-    const [groupedData, setGroupedData] = useState([])
+    const requestsList = useSelector(state => state.requests.requests);
+    const [groupedVocationRequests, setGroupedVocationRequests] = useState([]);
 
-    const renderData = data => {
-        let res = []
+    const renderRequestsList = reqList => {
+        let grupedReqList = [];
         let counter = 0;
-        data.forEach((key, i) => {
-            res.push(
+        reqList.forEach((key, i) => {
+            grupedReqList.push(
                 <div className="year__group" key={i}>{key[0].year} Year</div>
             )
             key.forEach(req => {
                 counter++;
-                res.push(
-                    <Request mode={counter % 2 ? "shadow" : "light"} key={req.id} req={req} />
+                grupedReqList.push(
+                    <Request backgroundMode={counter % 2 ? "shadow" : "light"} key={req.id} currentRequest={req} />
                 )
             }
             )
         })
-        return res
+        return grupedReqList;
     }
 
     useEffect(() => {
-        setGroupedData(groupByYear(requests).reverse())
-    }, [requests])
+        setGroupedVocationRequests(groupByYear(requestsList).reverse());
+    }, [requestsList]);
 
     return (
         <div className="container">
             <div className="content requests-list__content">
                 <div className="title">My Leave Requests</div>
-                {requests.length === 0
-                    ? (
-                        <img className="empty" src={emptyList} />
-                    ) : (
-                        renderData(groupedData)
-                    )
+                {!requestsList.length ?
+                    <img className="empty" src={emptyList} /> :
+                    renderRequestsList(groupedVocationRequests)
                 }
             </div>
         </div>
     )
 }
 
-export default RequestsList
+export default RequestsList;

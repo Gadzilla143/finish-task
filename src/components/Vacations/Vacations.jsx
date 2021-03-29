@@ -1,6 +1,6 @@
-import React from 'react'
-import arrow from '../../assets/vacations/arrow.png'
-import './Vacations.scss'
+import React from 'react';
+import arrow from '../../assets/vacations/arrow.png';
+import './Vacations.scss';
 
 const Vacations = () => {
     return (
@@ -22,4 +22,4 @@ const Vacations = () => {
     )
 }
 
-export default Vacations
+export default Vacations;

@@ -1,28 +1,28 @@
-import React, { useState, useEffect } from 'react'
-import calculateDays from '../../../services/calculateDays';
-import './Change.scss'
-import formatDate from '../../../services/formatDate';
-import { imgController } from '../../../services/imgController';
+import React, { useState, useEffect } from 'react';
+import calculateDays from '../../../helpers/calculateDays';
+import './ChangeRequest.scss';
+import formatDate from '../../../helpers/formatDate';
+import { imgController } from '../../../helpers/imgController';
 import RequestForm from '../../requestForm/requestForm';
 import { useDispatch } from 'react-redux';
 import { updateRequestAction } from '../../../store/reducers/requesrsReducer';
 
-const Change = ({ setActive, request }) => {
-    const [startDate, setStartDate] = useState(request.startDate);
-    const [endDate, setEndDate] = useState(request.endDate);
-    const [calcDays, setCalcDays] = useState(request.days);
-    const dispatch = useDispatch()
+const ChangeRequest = ({ setActive, currentRequest }) => {
+    const [startDate, setStartDate] = useState(currentRequest.startDate);
+    const [endDate, setEndDate] = useState(currentRequest.endDate);
+    const [calcDays, setCalcDays] = useState(currentRequest.days);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         setCalcDays(calculateDays(startDate, endDate))
-    }, [startDate, endDate])
+    }, [startDate, endDate]);
 
     const updateRequests = () => {
         
         dispatch(updateRequestAction({
-            id: request.id,
-            requestType: request.requestType,
-            dateTitle: request.dateTitle,
+            id: currentRequest.id,
+            requestType: currentRequest.requestType,
+            dateTitle: currentRequest.dateTitle,
             // Since there is no request registration function in the task, I register all requests until 2021 by default.
             registered: startDate.getFullYear() < 2021,
             startDate,
@@ -31,31 +31,31 @@ const Change = ({ setActive, request }) => {
             todayDate: new Date(),
             year: startDate.getFullYear()
         }))
-        setActive(false)
-    }
+        setActive(false);
+    };
 
     return (
         <div className="modal">
-            <div className={`content new-request__content ${request.requestType === "Sick" ? "new-request__content__sick" : ""}`}>
+            <div className={`content new-request__content ${currentRequest.requestType === "Sick" ? "new-request__content__sick" : ""}`}>
                 <div className="change__title">
                     <p>Change request</p>
                 </div>
                 <div className="request__block inf__block">
-                    <img className="request__logo" src={imgController(request.requestType)} />
+                    <img className="request__logo" src={imgController(currentRequest.requestType)} />
                     <div className="request__inf">
-                        <b>{request.dateTitle}: {formatDate(request.startDate)} - {formatDate(request.endDate)}&nbsp;{request.requestType === 'Vacation' && <div>({request.days} days)</div>}</b>
-                        <p>Created: {formatDate(request.todayDate)}</p>
-                        {request.requestType === 'Own expense' &&
+                        <b>{currentRequest.dateTitle}: {formatDate(currentRequest.startDate)} - {formatDate(currentRequest.endDate)}&nbsp;{currentRequest.requestType === 'Vacation' && <div>({currentRequest.days} days)</div>}</b>
+                        <p>Created: {formatDate(currentRequest.todayDate)}</p>
+                        {currentRequest.requestType === 'Own expense' &&
                             <p>Reason: Reason type</p>
                         }
-                        {request.requestType === 'Sick' &&
+                        {currentRequest.requestType === 'Sick' &&
                             <p>Hours worked: 4</p>
                         }
-                        <p style={{ color: "black" }} className="request__state">{request.registered ? "Pending confirmation" : "Pending approval"}</p>
+                        <p style={{ color: "black" }} className="request__state">{currentRequest.registered ? "Pending confirmation" : "Pending approval"}</p>
                     </div>
                 </div>
                 <RequestForm
-                    requestType={request.requestType}
+                    requestType={currentRequest.requestType}
                     setStartDate={setStartDate}
                     setEndDate={setEndDate}
                     calcDays={calcDays}
@@ -74,4 +74,4 @@ const Change = ({ setActive, request }) => {
     )
 }
 
-export default Change
+export default ChangeRequest;

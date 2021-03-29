@@ -1,9 +1,9 @@
-import React from 'react'
-import './App.scss'
-import Header from './Header/Header'
-import NewRequest from './NewRequest/NewRequest'
-import RequestsList from './RequestsList/RequestsList'
-import Vacations from './Vacations/Vacations'
+import React from 'react';
+import './App.scss';
+import Header from './Header/Header';
+import RequestCreator from './RequestCreator/RequestCreator';
+import RequestsList from './RequestsList/RequestsList';
+import Vacations from './Vacations/Vacations';
 
 const App = () => {
     return (
@@ -13,7 +13,7 @@ const App = () => {
                 <div className="main-wrapper">
                     <div className="select-container">
                         <Vacations />
-                        <NewRequest />
+                        <RequestCreator />
                     </div>
                     <RequestsList />
                 </div>
@@ -22,4 +22,4 @@ const App = () => {
     )
 }
 
-export default App
+export default App;

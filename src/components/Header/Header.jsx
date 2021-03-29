@@ -1,8 +1,8 @@
-import React from 'react'
-import './Header.scss'
-import exitImg from '../../assets/header/Vector.png'
-import vector from '../../assets/header/plane.png'
-import user from '../../assets/header/anna.png'
+import React from 'react';
+import './Header.scss';
+import exitImg from '../../assets/header/Vector.png';
+import vector from '../../assets/header/plane.png';
+import user from '../../assets/header/anna.png';
 
 const Header = () => {
     return (
@@ -37,4 +37,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default Header;

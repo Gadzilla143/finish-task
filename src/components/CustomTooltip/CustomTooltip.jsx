@@ -1,5 +1,5 @@
-import React from 'react'
-import './CustomTooltip.scss'
+import React from 'react';
+import './CustomTooltip.scss';
 
 const CustomTooltip = () => {
     return (
@@ -13,4 +13,4 @@ const CustomTooltip = () => {
     )
 }
  
-export default CustomTooltip
+export default CustomTooltip;

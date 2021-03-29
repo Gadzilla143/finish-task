@@ -1,29 +1,29 @@
-import React, { useState, useEffect } from 'react'
-import './NewRequest.scss'
-import vacation from '../../assets/new_request/Vacation.png'
-import sick from '../../assets/new_request/Sick.png'
-import ownExpense from '../../assets/new_request/ownExpense.png'
-import { useDispatch } from 'react-redux'
-import Confirm from '../modals/Confirm/Confirm'
-import calculateDays from '../../services/calculateDays'
-import { addRequestAction } from '../../store/reducers/requesrsReducer'
-import RequestForm from '../requestForm/requestForm'
+import React, { useState, useEffect } from 'react';
+import './RequestCreator.scss';
+import vacation from '../../assets/new_request/Vacation.png';
+import sick from '../../assets/new_request/Sick.png';
+import ownExpense from '../../assets/new_request/ownExpense.png';
+import { useDispatch } from 'react-redux';
+import ConfirmRequest from '../modals/ConfirmRequest/ConfirmRequest';
+import calculateDays from '../../helpers/calculateDays';
+import { addRequestAction } from '../../store/reducers/requesrsReducer';
+import RequestForm from '../requestForm/requestForm';
 
-const NewRequest = () => {
+const RequestCreator = () => {
     const [requestType, setRequestType] = useState("Vacation");
-    const [request, setRequest] = useState({})
-    const [img, setImg] = useState(vacation)
+    const [request, setRequest] = useState({});
+    const [img, setImg] = useState(vacation);
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
-    const [calcDays, setCalcDays] = useState(1)
-    const [popupActive, setPopupActive] = useState(false)
-    const [dateTitle, setDateTitle] = useState('')
-    const dispatch = useDispatch()
-    
+    const [calcDays, setCalcDays] = useState(1);
+    const [popupActive, setPopupActive] = useState(false);
+    const [dateTitle, setDateTitle] = useState('');
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        console.log(vacation)
-        setCalcDays(calculateDays(startDate, endDate))
-    }, [startDate, endDate])
+        console.log(vacation);
+        setCalcDays(calculateDays(startDate, endDate));
+    }, [startDate, endDate]);
 
     useEffect(() => {
         switch (requestType) {
@@ -61,7 +61,7 @@ const NewRequest = () => {
         } else {
             dispatch(addRequestAction(request))
         }
-    }
+    };
 
     return (
         <div className="container ">
@@ -86,9 +86,9 @@ const NewRequest = () => {
                     </div>
                 </div>
             </div>
-            {popupActive && <Confirm setActive={setPopupActive} request={request} />}
+            {popupActive && <ConfirmRequest setActive={setPopupActive} currentRequest={request} />}
         </div>
     )
 }
 
-export default NewRequest
+export default RequestCreator;
