@@ -79,15 +79,6 @@
       line-height: 18px;
       letter-spacing: 0.4px;
       display: flex;
-      .question {
-        cursor: pointer;
-        width: 16px;
-        height: 16px;
-        background: url(../../assets/Question.svg);
-        &:hover {
-          background: url(../../assets/Question-hover.svg);
-        }
-      }
     }
     .date-block__calculate {
       cursor: none;

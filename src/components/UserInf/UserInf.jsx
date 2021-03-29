@@ -11,14 +11,13 @@ const UserInf = ({ name, comment = null }) => {
     useEffect(() => {
         if (comment) {
             setImg(approve)
-        } else if (name === 'Will McConnel') {
-            setImg(will)
-        } else if (name === 'John Smith') {
-            setImg(john)
-        } else if (name === 'Mike Smith') {
-            setImg(mike)
-        } else if (name === 'Katrin Brown') {
-            setImg(katrine)
+        } else {
+            switch (name){
+                case 'Will McConnel': setImg(will); break;
+                case 'John Smith': setImg(john); break;
+                case 'Mike Smith': setImg(mike); break;
+                case 'Katrin Brown': setImg(katrine); break;
+            }
         }
     }, [])
     return (

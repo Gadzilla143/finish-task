@@ -5,7 +5,6 @@ import vacation from '../../../assets/request/vacation.png'
 import './Change.scss'
 import formatDate from '../../../services/formatDate';
 
-
 const Change = ({ setActive, request }) => {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
@@ -37,7 +36,6 @@ const Change = ({ setActive, request }) => {
                     </div>
                 </div>
                 <div className="new-request__inf">
-
                     <div className="select">
                         <select disabled style={{background: "#F1F2F7"}} >
                             <option >{request.requestType}</option>
@@ -84,7 +82,7 @@ const Change = ({ setActive, request }) => {
                         </div>
                         <div className="date-block__comment">
                             Comment
-                            <textarea ></textarea>
+                            <textarea></textarea>
                         </div>
                     </div>
                 </div>

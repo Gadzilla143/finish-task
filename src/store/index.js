@@ -3,7 +3,6 @@ import { createStore } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension';
 import requestsReducer from './reducers/requesrsReducer'
 
-
 const rootReducer = combineReducers({
     requests: requestsReducer
 })

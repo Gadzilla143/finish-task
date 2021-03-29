@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux'
 import Confirm from '../modals/Confirm/Confirm'
 import calculateDays from '../../services/calculateDays'
 import { addRequestAction } from '../../store/reducers/requesrsReducer'
+import CustomTooltip from '../customTooltip/customTooltip'
 
 const NewRequest = () => {
     const [requestType, setRequestType] = useState("Vacation");
@@ -19,31 +20,26 @@ const NewRequest = () => {
     const [popupActive, setPopupActive] = useState(false)
     const [dateTitle, setDateTitle] = useState('')
     const dispatch = useDispatch()
-    
-
     useEffect(() => {
+        console.log(vacation)
         setCalcDays(calculateDays(startDate, endDate))
     }, [startDate, endDate])
 
     useEffect(() => {
-        let imgUrl = img
         switch (requestType) {
             case "Vacation":
                 setDateTitle('Vacation')
-                imgUrl = vacation;
+                setImg(vacation)
                 break;
             case "Sick":
                 setDateTitle('Sick leave')
-                imgUrl = sick;
+                setImg(sick)
                 break;
             case "Own expense":
                 setDateTitle('Own expense leave')
-                imgUrl = ownExpense;
+                setImg(ownExpense)
                 break;
-            default:
-                imgUrl = vacation;
         }
-        setImg(imgUrl)
     }, [requestType])
 
     const addRequest = () => {
@@ -67,10 +63,6 @@ const NewRequest = () => {
         }
     }
 
-    const handleChange = (event) => {
-        setRequestType(event.target.value)
-    }
-
     return (
         <div className="container ">
             <div className={`content new-request__content ${requestType === "Sick" ? "new-request__content__sick" : ""}`}>
@@ -78,7 +70,7 @@ const NewRequest = () => {
                 <div className="new-request__inf">
                     <h3>New Request</h3>
                     <div className="select">
-                        <select onChange={handleChange} value={requestType}>
+                        <select onChange={(event) => setRequestType(event.target.value)} value={requestType}>
                             <option value="Vacation">Vacation leave</option>
                             <option value="Sick">Sick leave</option>
                             <option value="Own expense">Own expense leave</option>
@@ -89,7 +81,6 @@ const NewRequest = () => {
                             sick leave from a medical establishment to Personnel Officer
                             (Katsiaryna Barysik) as soon as you get it.
                         </div>
-
                     }
                     <div className="new-request__date">
                         <div className="date-block">
@@ -117,7 +108,9 @@ const NewRequest = () => {
                             </div>
                             {requestType === "Vacation" &&
                                 <div className="date-block__element">
-                                    <div className="date-block__title">Day(s) <div className="question" style={{ marginLeft: "6px" }}/ ></div>
+                                    <div className="date-block__title">Day(s)
+                                        <CustomTooltip />
+                                    </div>
                                     <div className="date-block__calculate">
                                         {calcDays}
                                     </div>
@@ -138,7 +131,7 @@ const NewRequest = () => {
                     </div>
                 </div>
             </div>
-            {popupActive && <Confirm setActive={setPopupActive} request={request}  />}
+            {popupActive && <Confirm setActive={setPopupActive} request={request} />}
         </div>
     )
 }

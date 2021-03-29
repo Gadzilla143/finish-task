@@ -10,29 +10,22 @@ import { deleteRequestAction } from '../../../store/reducers/requesrsReducer'
 
 const Information = ({ request, setActive, setRequest, setChange }) => {
     const dispatch = useDispatch()
-    const [imgUrl, setImgUrl] = useState('')
+    const [imgUrl, setImgUrl] = useState(vacation)
     const [title, setTitle] = useState('')
-    
-
     useEffect(() => {
         switch (request.requestType) {
             case "Vacation":
                 setImgUrl(vacation);
                 setTitle('Request for vacation')
-                
                 break;
             case "Sick":
                 setImgUrl(sick);
                 setTitle('Sick leave request')
-                
                 break;
             case "Own expense":
                 setImgUrl(ownExpense);
                 setTitle('Request for leave at own expense')
-                
                 break;
-            default:
-                setImgUrl(vacation);
         }
     })
 
@@ -106,7 +99,6 @@ const Information = ({ request, setActive, setRequest, setChange }) => {
                 </div>
             </div>
         </div>
-
     )
 }
 

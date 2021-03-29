@@ -9,7 +9,7 @@ import Information from '../modals/Information/Information'
 import Change from '../modals/Change/Change'
 
 const Request = ({ mode, req }) => {
-    const [imgUrl, setImgUrl] = useState('')
+    const [imgUrl, setImgUrl] = useState(vacation)
     const [popupActive, setPopupActive] = useState(false)
     const [changePopupActive, setChangePopupActive] = useState(false)
     const [request, setRequest] = useState(false)
@@ -25,8 +25,6 @@ const Request = ({ mode, req }) => {
             case "Own expense":
                 setImgUrl(ownExpense);
                 break;
-            default:
-                setImgUrl(vacation);
         }
     })
     return (
