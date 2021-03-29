@@ -6,6 +6,7 @@ import { imgController } from '../../../helpers/imgController';
 import RequestForm from '../../requestForm/requestForm';
 import { useDispatch } from 'react-redux';
 import { updateRequestAction } from '../../../store/reducers/requesrsReducer';
+import { vacationDaysAction } from '../../../store/reducers/vacationDaysReducer';
 
 const ChangeRequest = ({ setActive, currentRequest }) => {
     const [startDate, setStartDate] = useState(currentRequest.startDate);
@@ -18,7 +19,9 @@ const ChangeRequest = ({ setActive, currentRequest }) => {
     }, [startDate, endDate]);
 
     const updateRequests = () => {
-        
+        if (currentRequest.requestType === "Vacation") {
+            dispatch(vacationDaysAction(calcDays - currentRequest.days))
+        }
         dispatch(updateRequestAction({
             id: currentRequest.id,
             requestType: currentRequest.requestType,

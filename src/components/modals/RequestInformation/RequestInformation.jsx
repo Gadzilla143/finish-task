@@ -5,6 +5,7 @@ import formatDate from '../../../helpers/formatDate';
 import { useDispatch } from 'react-redux';
 import { deleteRequestAction } from '../../../store/reducers/requesrsReducer';
 import { imgController } from '../../../helpers/imgController';
+import { vacationDaysAction } from '../../../store/reducers/vacationDaysReducer';
 
 const RequestInformation = ({ currentRequest, setActive, setRequest, setChange }) => {
     const dispatch = useDispatch()
@@ -24,6 +25,9 @@ const RequestInformation = ({ currentRequest, setActive, setRequest, setChange }
     })
 
     const deleteRequest = () => {
+        if (currentRequest.requestType === "Vacation") {
+            dispatch(vacationDaysAction(- currentRequest.days))
+        }
         dispatch(deleteRequestAction(currentRequest.id));
         setActive(false);
     };

@@ -5,6 +5,7 @@ import vacation from '../../../assets/request/vacation.png';
 import formatDate from '../../../helpers/formatDate';
 import calculateDays from '../../../helpers/calculateDays';
 import './ConfirmRequest.scss';
+import { vacationDaysAction } from '../../../store/reducers/vacationDaysReducer';
 
 const ConfirmRequest = ({ currentRequest, setActive }) => {
     const requests = useSelector(state => state.requests.requests);
@@ -30,6 +31,7 @@ const ConfirmRequest = ({ currentRequest, setActive }) => {
     }, []);
 
     const confirmHandle = () => {
+        dispatch(vacationDaysAction(currentRequest.days))
         dispatch(addRequestAction(currentRequest))
         setActive(false)
     };

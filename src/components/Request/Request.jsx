@@ -10,7 +10,7 @@ const Request = ({ backgroundMode, currentRequest }) => {
     const [popupActive, setPopupActive] = useState(false);
     const [changePopupActive, setChangePopupActive] = useState(false);
     const [request, setRequest] = useState({});
-    
+
     return (
         <div className={"request " + backgroundMode}>
             <div className="request__block">

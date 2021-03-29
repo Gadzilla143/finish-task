@@ -21,7 +21,6 @@ const RequestCreator = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log(vacation);
         setCalcDays(calculateDays(startDate, endDate));
     }, [startDate, endDate]);
 

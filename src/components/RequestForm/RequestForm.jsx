@@ -5,6 +5,7 @@ import CustomTooltip from "../customTooltip/customTooltip";
 import './RequestForm.scss';
 
 const RequestForm = ({ requestType, setStartDate, setEndDate, calcDays, startDate, endDate, select, setRequestType }) => {
+
     const startDateBlock = (
         <div className="date-block__element">
             <div className="date-block__title">Start Date <div style={{ color: "#d9dadb", marginLeft: "3px", letterSpacing: "-0.2px" }}>&nbsp; (inclusive)</div></div>

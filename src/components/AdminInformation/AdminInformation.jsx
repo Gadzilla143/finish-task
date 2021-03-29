@@ -12,7 +12,7 @@ const AdminInformation = ({ name, comment }) => {
         if (comment) {
             setImg(approve);
         } else {
-            switch (name){
+            switch (name) {
                 case 'Will McConnel': setImg(will); break;
                 case 'John Smith': setImg(john); break;
                 case 'Mike Smith': setImg(mike); break;
@@ -30,7 +30,7 @@ const AdminInformation = ({ name, comment }) => {
                         <div className="inf__user-comments">Comments: {comment}</div>
                     </>
                     :
-                    <div style={{marginTop: "5px"}} className="inf__user-name"><b>{name}</b></div>
+                    <div style={{ marginTop: "5px" }} className="inf__user-name"><b>{name}</b></div>
                 }
             </div>
         </div>

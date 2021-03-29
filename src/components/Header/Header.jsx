@@ -22,7 +22,7 @@ const Header = () => {
                 </div>
                 <div id="user-panel" className="header__user-panel">
                     <div className="header__item">
-                        <img src={vector} alt="near" className="vector-img"/>
+                        <img src={vector} alt="near" className="vector-img" />
                     </div>
                     <div className="header__user" href="user.html">
                         <img src={user} alt="user" />
