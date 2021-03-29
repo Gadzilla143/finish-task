@@ -13,7 +13,7 @@ export default function vacationDaysReducer(state = initialState, action) {
   }
 }
 
-export const vacationDaysAction = (payload) => ({
+export const changeVacationDaysAction = (payload) => ({
     type: CHANGE_VACATION_DAYS,
     payload,
   });
