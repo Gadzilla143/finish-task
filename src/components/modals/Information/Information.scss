@@ -1,6 +1,5 @@
 .information__content {
   width: 500px;
-  height: 710px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -63,7 +62,6 @@
   .btn {
     cursor: pointer;
     margin-left: 6px;
-    z-index: 1;
     width: 90px;
     height: 34px;
     border-radius: 3px;

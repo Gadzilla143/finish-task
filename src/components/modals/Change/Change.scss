@@ -13,3 +13,37 @@
   -moz-box-shadow: 0px 3px 1px -3px rgba(34, 60, 80, 0.6);
   box-shadow: 0px 3px 1px -3px rgba(34, 60, 80, 0.6);
 }
+
+.change__bottom {
+  margin-top: 30px;
+  bottom: 0;
+  background: #fafafa;
+  border-radius: 0px 0px 10px 10px;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  .change__btn-block {
+    display: flex;
+    margin-right: 30px;
+  }
+  .btn {
+    cursor: pointer;
+    margin-left: 6px;
+    width: 90px;
+    height: 34px;
+    border-radius: 3px;
+    background-color: #5495ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 12px;
+  }
+  .decline {
+    color: #5495ff;
+    background-color: #fafafa;
+    padding-left: 20px;
+  }
+}

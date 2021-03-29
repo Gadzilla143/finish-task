@@ -2,28 +2,22 @@ import React, { useEffect, useState } from 'react'
 import UserInf from '../../UserInf/UserInf'
 import './Information.scss'
 import formatDate from '../../../services/formatDate'
-import vacation from '../../../assets/request/vacation.png'
-import sick from '../../../assets/request/sick.png'
-import ownExpense from '../../../assets/request/ownExpense.png'
 import { useDispatch } from 'react-redux'
 import { deleteRequestAction } from '../../../store/reducers/requesrsReducer'
+import { imgController } from '../../../services/imgController'
 
 const Information = ({ request, setActive, setRequest, setChange }) => {
     const dispatch = useDispatch()
-    const [imgUrl, setImgUrl] = useState(vacation)
     const [title, setTitle] = useState('')
     useEffect(() => {
         switch (request.requestType) {
             case "Vacation":
-                setImgUrl(vacation);
                 setTitle('Request for vacation')
                 break;
             case "Sick":
-                setImgUrl(sick);
                 setTitle('Sick leave request')
                 break;
             case "Own expense":
-                setImgUrl(ownExpense);
                 setTitle('Request for leave at own expense')
                 break;
         }
@@ -49,7 +43,7 @@ const Information = ({ request, setActive, setRequest, setChange }) => {
                         <div className="copy" />
                     </div>
                     <div className="request__block inf__block">
-                        <img className="request__logo" src={imgUrl} />
+                        <img className="request__logo" src={imgController(request.requestType)} />
                         <div className="request__inf">
                             <b>{request.dateTitle}: {formatDate(request.startDate)} - {formatDate(request.endDate)}&nbsp;{request.requestType === 'Vacation' && <div>({request.days} days)</div>}</b>
                             <p>Created: {formatDate(request.todayDate)}</p>

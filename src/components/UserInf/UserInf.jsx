@@ -6,7 +6,7 @@ import john from '../../assets/inf/john.png'
 import mike from '../../assets/inf/mike.png'
 import katrine from '../../assets/inf/katrine.png'
 
-const UserInf = ({ name, comment = null }) => {
+const UserInf = ({ name, comment }) => {
     const [img, setImg] = useState(approve)
     useEffect(() => {
         if (comment) {
